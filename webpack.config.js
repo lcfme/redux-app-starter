@@ -5,8 +5,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [
-      {
+    loaders: [{
         test: /\.jsx?$/i,
         exclude: `${__dirname}/node_modules`,
         loader: 'babel-loader',
@@ -15,8 +14,17 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/i,
-        loader: 'style-loader!css-loader'
+        test: [/\.less$/, /\.css$/],
+        use: [{
+            loader: "style-loader" // creates style nodes from JS strings
+          },
+          {
+            loader: "css-loader" // translates CSS into CommonJS
+          },
+          {
+            loader: "less-loader" // compiles Less to CSS
+          }
+        ]
       }
     ]
   }
